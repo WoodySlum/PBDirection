@@ -16,6 +16,7 @@
 @implementation CalculateTurnByTurn
 
 @synthesize _Delegate;
+@synthesize mapView;
 
 -(void)calculate{
     
@@ -67,7 +68,9 @@
                          theAppDelegate._Steps = [[NSMutableArray alloc] initWithCapacity:0];
                          
                          if (response != nil){
-                             
+                             if (mapView != nil) {
+                                 [mapView removeOverlays:mapView.overlays];
+                             }
                              for (MKRoute *actRoute in response.routes) {
                                  //NSLog(@"Distance: %f",actRoute.distance);
                                  
@@ -80,11 +83,14 @@
                                      NSLog(@"Description: %@",actStep.description);
                                      NSLog(@"Distance: %f",actStep.distance);
                                       */
-                                     
+                                     if (mapView != nil) {
+                                         [mapView insertOverlay:actStep.polyline atIndex:0 level:MKOverlayLevelAboveRoads];
+                                      }
                                      [theAppDelegate._Steps addObject:actStep];
                                  }
-                                 
-                                 
+                                 if (mapView != nil) {
+                                     [self zoomMapViewToFitAnnotations:mapView animated:YES];
+                                 }
                              }
                          } else {
                              [_Delegate updateEnd:NO :[error description]];
@@ -93,11 +99,11 @@
                          
                          //NSLog(@"%@",[error description]);
                          
-                         MKRouteStep *initialStep = [theAppDelegate._Steps objectAtIndex:0];
+                         //MKRouteStep *initialStep = [theAppDelegate._Steps objectAtIndex:0];
                          MKRouteStep *firstStep =[theAppDelegate._Steps objectAtIndex:1];
-                         MKRouteStep *secondStep =[theAppDelegate._Steps objectAtIndex:2];
+                         //MKRouteStep *secondStep =[theAppDelegate._Steps objectAtIndex:2];
                          
-                         NSString *distance2 = [[NSString alloc] initWithFormat:@"%d",(int)firstStep.distance];
+                         NSString *distance2 = [[NSString alloc] initWithFormat:@"%i m",(int)firstStep.distance];
                          NSString *info2 = firstStep.instructions;
                          
                          NSNumber *infoTextKey1 = @(0);
@@ -136,6 +142,108 @@
     
     
     return @"";
+}
+
+#pragma mark - MapView useful function
+
+- (void)recenterMap:(MKMapView *) mv {
+    
+    NSArray *coordinates = mv.overlays;//[mv valueForKeyPath:@"annotations.coordinate"];
+    
+    
+    
+    CLLocationCoordinate2D maxCoord = {-90.0f, -180.0f};
+    
+    CLLocationCoordinate2D minCoord = {90.0f, 180.0f};
+    
+    
+    
+    for(NSValue *value in coordinates) {
+        
+        CLLocationCoordinate2D coord = {0.0f, 0.0f};
+        
+        [value getValue:&coord];
+        
+        if(coord.longitude > maxCoord.longitude) {
+            
+            maxCoord.longitude = coord.longitude;
+            
+        }
+        
+        if(coord.latitude > maxCoord.latitude) {
+            
+            maxCoord.latitude = coord.latitude;
+            
+        }
+        
+        if(coord.longitude < minCoord.longitude) {
+            
+            minCoord.longitude = coord.longitude;
+            
+        }
+        
+        if(coord.latitude < minCoord.latitude) {
+            
+            minCoord.latitude = coord.latitude;
+            
+        }
+        
+    }
+    
+    MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+    
+    region.center.longitude = (minCoord.longitude + maxCoord.longitude) / 2.0;
+    
+    region.center.latitude = (minCoord.latitude + maxCoord.latitude) / 2.0;
+    
+    region.span.longitudeDelta = maxCoord.longitude - minCoord.longitude;
+    
+    region.span.latitudeDelta = maxCoord.latitude - minCoord.latitude;
+    
+    [mv setRegion:region animated:YES];
+    
+}
+
+#define MINIMUM_ZOOM_ARC 0.044 //approximately 1 miles (1 degree of arc ~= 69 miles)
+#define ANNOTATION_REGION_PAD_FACTOR 1.15
+#define MAX_DEGREES_ARC 360
+//size the mapView region to fit its annotations
+- (void)zoomMapViewToFitAnnotations:(MKMapView *)mv animated:(BOOL)animated
+{
+    NSArray *annotations = mv.overlays;
+    int count = [mv.annotations count];
+    if ( count == 0) { return; } //bail if no annotations
+    
+    //convert NSArray of id <MKAnnotation> into an MKCoordinateRegion that can be used to set the map size
+    //can't use NSArray with MKMapPoint because MKMapPoint is not an id
+    MKMapPoint points[count]; //C array of MKMapPoint struct
+    for( int i=0; i<count; i++ ) //load points C array by converting coordinates to points
+    {
+        CLLocationCoordinate2D coordinate = [(id <MKAnnotation>)[annotations objectAtIndex:i] coordinate];
+        points[i] = MKMapPointForCoordinate(coordinate);
+    }
+    //create MKMapRect from array of MKMapPoint
+    MKMapRect mapRect = [[MKPolygon polygonWithPoints:points count:count] boundingMapRect];
+    //convert MKCoordinateRegion from MKMapRect
+    MKCoordinateRegion region = MKCoordinateRegionForMapRect(mapRect);
+    
+    //add padding so pins aren't scrunched on the edges
+    region.span.latitudeDelta  *= ANNOTATION_REGION_PAD_FACTOR;
+    region.span.longitudeDelta *= ANNOTATION_REGION_PAD_FACTOR;
+    //but padding can't be bigger than the world
+    if( region.span.latitudeDelta > MAX_DEGREES_ARC ) { region.span.latitudeDelta  = MAX_DEGREES_ARC; }
+    if( region.span.longitudeDelta > MAX_DEGREES_ARC ){ region.span.longitudeDelta = MAX_DEGREES_ARC; }
+    
+    //and don't zoom in stupid-close on small samples
+    if( region.span.latitudeDelta  < MINIMUM_ZOOM_ARC ) { region.span.latitudeDelta  = MINIMUM_ZOOM_ARC; }
+    if( region.span.longitudeDelta < MINIMUM_ZOOM_ARC ) { region.span.longitudeDelta = MINIMUM_ZOOM_ARC; }
+    //and if there is a sample of 1 we want the max zoom-in instead of max zoom-out
+    if( count == 1 )
+    {
+        region.span.latitudeDelta = MINIMUM_ZOOM_ARC;
+        region.span.longitudeDelta = MINIMUM_ZOOM_ARC;
+    }
+    [mv setRegion:region animated:animated];
 }
 
 @end

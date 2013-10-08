@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <MapKit/MapKit.h>
 #import "KBPebbleMessageQueue.h"
 
 @protocol UpdateCompleteDelegate <NSObject>
@@ -17,9 +17,11 @@
 @interface CalculateTurnByTurn : NSObject{
     
     id<UpdateCompleteDelegate> _Delegate;
+    MKMapView *mapView;
 }
 
 @property (strong, nonatomic) id<UpdateCompleteDelegate> _Delegate;
+@property (strong, nonatomic) MKMapView *mapView;
 
 -(void)calculate;
 

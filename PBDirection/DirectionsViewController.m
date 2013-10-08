@@ -26,6 +26,7 @@
 @synthesize locations;
 @synthesize _Updating;
 @synthesize _lbMessage;
+@synthesize mapView;
 
 @synthesize _WaitingAlert;
 
@@ -85,6 +86,8 @@
     
     [self.locationManager startUpdatingLocation];
     
+    mapView.delegate = self;
+    
 }
 
 -(IBAction)stopRefreshAutoLocation:(id)sender{
@@ -123,6 +126,7 @@
         _Updating = YES;
         AppDelegate *theAppDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
         theAppDelegate._TurnByTurn._Delegate = self;
+        theAppDelegate._TurnByTurn.mapView = mapView;
         [theAppDelegate._TurnByTurn calculate];
     }
 }
@@ -279,6 +283,16 @@
     
     [self updateTurnByTurn];
     
+}
+
+#pragma mark - MKMapView delegate
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 4.0;
+    return  renderer;
 }
 
 @end

@@ -28,12 +28,12 @@
 		776D4C7217E9F15100A6C9F9 /* PBDirectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 776D4C7117E9F15100A6C9F9 /* PBDirectionTests.m */; };
 		776D4C7C17E9F15D00A6C9F9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 776D4C7B17E9F15D00A6C9F9 /* MapKit.framework */; };
 		77855B7117EA039700EF79FB /* DirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77855B7017EA039700EF79FB /* DirectionsViewController.m */; };
-		779CE7E417EA583B00476C08 /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779CE7E317EA583B00476C08 /* PebbleKit.framework */; };
-		779CE7E617EA584600476C08 /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779CE7E517EA584600476C08 /* PebbleVendor.framework */; };
 		779D53D317EBA26B0050EDE5 /* KBPebbleMessageQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 779D53D217EBA26B0050EDE5 /* KBPebbleMessageQueue.m */; };
 		77F5F66917EB221200601CE3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F5F66717EB221200601CE3 /* icon.png */; };
 		77F5F66A17EB221200601CE3 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F5F66817EB221200601CE3 /* icon@2x.png */; };
 		77F5F66D17EB25FD00601CE3 /* CalculateTurnByTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F5F66C17EB25FD00601CE3 /* CalculateTurnByTurn.m */; };
+		B3BE95D718040F0100EE14F9 /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BE95D518040F0100EE14F9 /* PebbleKit.framework */; };
+		B3BE95D818040F0100EE14F9 /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BE95D618040F0100EE14F9 /* PebbleVendor.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +82,8 @@
 		77F5F66817EB221200601CE3 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		77F5F66B17EB25FD00601CE3 /* CalculateTurnByTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalculateTurnByTurn.h; path = ../CalculateTurnByTurn.h; sourceTree = "<group>"; };
 		77F5F66C17EB25FD00601CE3 /* CalculateTurnByTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalculateTurnByTurn.m; path = ../CalculateTurnByTurn.m; sourceTree = "<group>"; };
+		B3BE95D518040F0100EE14F9 /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleKit.framework; sourceTree = "<group>"; };
+		B3BE95D618040F0100EE14F9 /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleVendor.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +94,11 @@
 				775E7EC317EAE6400011EAAF /* ExternalAccessory.framework in Frameworks */,
 				775E7EC117EADE330011EAAF /* MessageUI.framework in Frameworks */,
 				775E7EBF17EADE2A0011EAAF /* CoreMotion.framework in Frameworks */,
+				B3BE95D718040F0100EE14F9 /* PebbleKit.framework in Frameworks */,
 				775E7EBD17EADE1F0011EAAF /* CoreBluetooth.framework in Frameworks */,
 				775E7EBB17EADE170011EAAF /* libz.dylib in Frameworks */,
-				779CE7E617EA584600476C08 /* PebbleVendor.framework in Frameworks */,
-				779CE7E417EA583B00476C08 /* PebbleKit.framework in Frameworks */,
 				776D4C4917E9F15100A6C9F9 /* CoreGraphics.framework in Frameworks */,
+				B3BE95D818040F0100EE14F9 /* PebbleVendor.framework in Frameworks */,
 				776D4C4B17E9F15100A6C9F9 /* UIKit.framework in Frameworks */,
 				776D4C7C17E9F15D00A6C9F9 /* MapKit.framework in Frameworks */,
 				776D4C4717E9F15100A6C9F9 /* Foundation.framework in Frameworks */,
@@ -159,6 +161,7 @@
 		776D4C4C17E9F15100A6C9F9 /* PBDirection */ = {
 			isa = PBXGroup;
 			children = (
+				B3BE95D418040F0100EE14F9 /* Libs */,
 				779D53D117EBA26B0050EDE5 /* KBPebbleMessageQueue.h */,
 				779D53D217EBA26B0050EDE5 /* KBPebbleMessageQueue.m */,
 				77F5F66B17EB25FD00601CE3 /* CalculateTurnByTurn.h */,
@@ -204,6 +207,15 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		B3BE95D418040F0100EE14F9 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				B3BE95D518040F0100EE14F9 /* PebbleKit.framework */,
+				B3BE95D618040F0100EE14F9 /* PebbleVendor.framework */,
+			);
+			path = Libs;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -449,6 +461,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/guidonaturani/Documents/iPhoneDev/Library,
+					/Users/smi/Documents/Github/PBDirection/Libs,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PBDirection/PBDirection-Prefix.pch";
@@ -468,6 +481,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/guidonaturani/Documents/iPhoneDev/Library,
+					/Users/smi/Documents/Github/PBDirection/Libs,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PBDirection/PBDirection-Prefix.pch";

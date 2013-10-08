@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import <PebbleKit/PebbleKit.h>
 
 #import "CalculateTurnByTurn.h"
 
-@interface ViewController : UIViewController <UpdateCompleteDelegate>{
+@interface ViewController : UIViewController <UpdateCompleteDelegate, MKMapViewDelegate, PBWatchDelegate, PBPebbleCentralDelegate>{
     
     IBOutlet UILabel* connectedLabel;
     BOOL shouldBeConnected;
     BOOL couldConnect;
-    BOOL isConnected;    
+    BOOL isConnected;
+    MKMapView *mapView;
     
 }
 

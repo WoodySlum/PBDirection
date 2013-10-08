@@ -12,16 +12,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="sDu-VP-iTk">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="always" id="sDu-VP-iTk">
                                 <rect key="frame" x="45" y="94" width="230" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gNa-NA-irb">
-                                <rect key="frame" x="88" y="132" width="146" height="30"/>
+                                <rect key="frame" x="87" y="132" width="149" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="calculate instructions">
+                                <state key="normal" title="Calculate instructions">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -72,7 +72,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Iwk-xM-6DL">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="updating..." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fgp-Ji-3iK">
@@ -82,12 +82,16 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="zPH-sv-QQ6">
+                                    <rect key="frame" x="33" y="82" width="255" height="163"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </mapView>
                             </subviews>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.2039215714" green="0.6549019814" blue="0.8627451062" alpha="0.14000000000000001" colorSpace="custom" customColorSpace="deviceRGB"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="instructionCell" id="5hM-qc-Cr0">
-                                <rect key="frame" x="0.0" y="107" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="276" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5hM-qc-Cr0" id="COG-7R-Bz9">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -117,11 +121,12 @@
                     <navigationItem key="navigationItem" id="4td-yn-fp4"/>
                     <connections>
                         <outlet property="_lbMessage" destination="fgp-Ji-3iK" id="ARM-fe-G6V"/>
+                        <outlet property="mapView" destination="zPH-sv-QQ6" id="6yw-cl-SYM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nay-fW-NQj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2042" y="-17"/>
+            <point key="canvasLocation" x="994" y="-17"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8vu-US-XTs">

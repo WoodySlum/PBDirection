@@ -12,8 +12,8 @@
 
 #import "CalculateTurnByTurn.h"
 
-@interface DirectionsViewController : UITableViewController <UpdateCompleteDelegate, CLLocationManagerDelegate>{
-    
+@interface DirectionsViewController : UITableViewController <UpdateCompleteDelegate, CLLocationManagerDelegate, MKMapViewDelegate>{
+    IBOutlet MKMapView *mapView;
 
     
 }
@@ -23,6 +23,7 @@
 @property(nonatomic,strong) NSMutableArray *_StringSteps;
 @property(nonatomic,strong) NSMutableArray *_Steps;
 @property(nonatomic,strong) MKRoute *_Route;
+@property(nonatomic,strong) MKMapView *mapView;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray *locations;

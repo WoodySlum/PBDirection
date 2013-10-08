@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     // TEST
-    _destination.text = @"via Giancarlo Rossi Carpaneto Piacentino";
+    _destination.text = @"rue françois genin lyon";
     
     AppDelegate *theAppDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
     _targetWatch = theAppDelegate._targetWatch;
@@ -146,7 +146,7 @@
                          NSMutableArray *iMkSteps = [[NSMutableArray alloc] initWithCapacity:0];
                          
                          DirectionsViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DirectionsViewController"];
-                         
+                         mapView = detail.mapView;
                          
                          if (response != nil){
                              
@@ -202,6 +202,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Pebble delegate
+
+- (void)pebbleFound:(PBWatch *)watch {
+    
+}
+
+- (void)pebbleConnected:(PBWatch *)watch {
+    
+}
+
+- (void)pebbleDisconnected:(PBWatch *)watch {
+    
+}
+
+- (void)pebbleLost:(PBWatch *)watch {
+    
 }
 
 @end
